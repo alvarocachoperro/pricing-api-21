@@ -11,7 +11,7 @@ This project is a Spring Boot application that provides a REST API for querying 
 
 ## Technologies Used
 
-- Java 17
+- Java 21
 - Spring Boot 3.3.2
 - H2 Database
 - JPA/Hibernate
@@ -35,8 +35,19 @@ This project is a Spring Boot application that provides a REST API for querying 
 
 ### Prerequisites
 
-- Java 11 or higher
-- Maven 3.6.x or higher
+- Java 21 (JDK 21)
+- Maven 3.9.x o superior (recomendado 3.9.6+)
+- Nota: asegúrate de que `JAVA_HOME` apunte al JDK 21.
+  - macOS/Linux (bash/zsh):
+    ```bash
+    export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+    export PATH="$JAVA_HOME/bin:$PATH"
+    ```
+  - Windows (PowerShell):
+    ```powershell
+    setx JAVA_HOME "C:\\Program Files\\Java\\jdk-21"
+    setx PATH "%JAVA_HOME%\\bin;%PATH%"
+    ```
 
 ### Running the Application
 
