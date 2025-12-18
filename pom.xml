@@ -113,23 +113,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
-				<configuration>
-					<source>21</source>
-					<target>21</target>
-					<!-- Evitar compilar el subproyecto/código generado con su propio POM bajo target -->
-					<excludes>
-						<exclude>target/generated-sources/openapi/**</exclude>
-					</excludes>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>1.18.34</version>
-						</path>
+   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.34</version>
+                        </path>
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
@@ -151,6 +147,9 @@
     <profiles>
         <profile>
             <id>openapi-codegen</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -169,6 +168,8 @@
                                     <apiPackage>es.ecommerce.demo.generated.api</apiPackage>
                                     <modelPackage>es.ecommerce.demo.generated.model</modelPackage>
                                     <invokerPackage>es.ecommerce.demo.generated.invoker</invokerPackage>
+                                    <!-- Añadir el directorio generado como fuente de compilación para priorizar clases generadas -->
+                                    <addCompileSourceRoot>true</addCompileSourceRoot>
                                     <configOptions>
                                         <interfaceOnly>true</interfaceOnly>
                                         <useSpringBoot3>true</useSpringBoot3>
@@ -190,5 +191,13 @@
             <url>https://repo1.maven.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <!-- Ensure artifact resolution from Maven Central -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
 
 </project>
