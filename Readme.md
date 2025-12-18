@@ -89,6 +89,45 @@ This project is a Spring Boot application that provides a REST API for querying 
     - **`value`**: The final price.
     - **`currency`**: The currency of the price.
 
+#### Example Responses
+
+- 200 OK
+  ```json
+  {
+    "productId": 35455,
+    "brandId": 1,
+    "priceList": 2,
+    "startDate": "2020-06-14T15:00:00Z",
+    "endDate": "2020-06-14T18:30:00Z",
+    "value": 25.45,
+    "currency": "EUR"
+  }
+  ```
+
+- 400 Bad Request (invalid parameter types)
+  ```json
+  {
+    "status": 400,
+    "message": "Error:Parse attempt failed for value [35455]"
+  }
+  ```
+
+- 400 Bad Request (missing parameter)
+  ```json
+  {
+    "status": 400,
+    "message": "Parameter 'productId' is missing"
+  }
+  ```
+
+- 404 Not Found
+  ```json
+  {
+    "status": 404,
+    "message": "Price not found"
+  }
+  ```
+
 ### Testing
 The project includes unit tests that verify the correctness of the API. To run the tests, use:
 ```bash
