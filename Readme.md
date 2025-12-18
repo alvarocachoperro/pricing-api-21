@@ -129,7 +129,19 @@ This project is a Spring Boot application that provides a REST API for querying 
   ```
 
 ### Testing
-The project includes unit tests that verify the correctness of the API. To run the tests, use:
+This project keeps a clear separation of responsibilities in its test suite:
+
+- Controller/integration tests (`PriceControllerTest`):
+  - Verify the HTTP endpoint behavior end-to-end (`GET /product-price`) using MockMvc.
+  - Cover success scenarios (200) and error handling (400 for type mismatch/missing parameters, 404 when price is not found).
+
+- Service unit tests (`PriceServiceImplTest`):
+  - Focus on business logic using a mocked repository.
+  - Validate the selection rule based on repository results: 0 elements → exception, 1 element → returned as-is, 2+ elements → highest `priority`.
+
+Redundant tests that duplicated scenarios were removed to keep the suite lean and faster, avoiding overlap between integration and unit layers.
+
+Run all tests with:
 ```bash
 mvn test
 ```
